@@ -2,21 +2,7 @@ import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
 
-type RConfigRequest = {
-  R_VERSION: string;
-  R_PACKAGES: string;
-  R_PORT: string;
-  R_ENV: string;
-  R_START_SCRIPT: string;
-};
-
-export const generateYamlFile = ({
-  R_VERSION,
-  R_PACKAGES,
-  R_PORT,
-  R_ENV,
-  R_START_SCRIPT,
-}: RConfigRequest) => {
+export const generateYamlFile = () => {
   // defining the contents of the yaml file
   const gitlabCiCdConfig = {
     image: "docker:latest",
@@ -34,7 +20,10 @@ export const generateYamlFile = ({
 
     deploy: {
       stage: "deploy",
-      script: ["docker pull $CI_REGISTRY_IMAGE:latest"],
+      script: [
+        "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY",
+        "docker pull $CI_REGISTRY_IMAGE:latest",
+      ],
       environment: {
         name: "production",
       },

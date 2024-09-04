@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import fs from "fs";
 import path from "path";
+
 import { validateRConfigRequest } from "./middleware/validation";
 import { generateDockerfile } from "./helpers/generate-dockerfile";
 import { generateYamlFile } from "./helpers/generate-gitlab-cicd-file";
@@ -46,13 +47,7 @@ app.post(
       const writeFilePath = path.join(__dirname, "../../Dockerfile");
       fs.writeFileSync(writeFilePath, dockerfileContent, "utf8");
 
-      generateYamlFile({
-        R_VERSION,
-        R_PACKAGES,
-        R_PORT,
-        R_ENV,
-        R_START_SCRIPT,
-      });
+      generateYamlFile();
 
       res.send({
         message: `Dockerfile saved at ${writeFilePath}`,
