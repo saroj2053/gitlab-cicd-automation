@@ -33,7 +33,7 @@ export const generateDockerfile = (
 
   if (R_START_SCRIPT) {
     const structuredScript = R_START_SCRIPT.split(" ")
-      .map((script: string) => `'${script}'`)
+      .map((script: string) => `"${script}"`)
       .join(",");
     dockerfileContent = dockerfileContent.replace(
       /{{R_START_SCRIPT}}/g,
