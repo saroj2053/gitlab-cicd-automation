@@ -17,7 +17,10 @@ export const generateDockerfile = (
   if (R_PORT) {
     dockerfileContent = dockerfileContent.replace(/{{R_PORT}}/g, R_PORT);
   } else {
-    dockerfileContent = dockerfileContent.replace(/EXPOSE {{R_PORT}}\n?/g, "");
+    dockerfileContent = dockerfileContent.replace(
+      /# Exposing port\nEXPOSE {{R_PORT}}\n?/g,
+      ""
+    );
   }
 
   if (R_ENV) {
@@ -26,7 +29,7 @@ export const generateDockerfile = (
       .replace(/{{R_ENV_VAL}}/g, R_ENV.split("=")[1]);
   } else {
     dockerfileContent = dockerfileContent.replace(
-      /ENV {{R_ENV_KEY}}={{R_ENV_VAL}}\n?/g,
+      /# Setting environment variables\nENV {{R_ENV_KEY}}={{R_ENV_VAL}}\n?/g,
       ""
     );
   }
