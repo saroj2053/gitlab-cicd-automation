@@ -2,7 +2,6 @@
 FROM r-base:{{R_VERSION}}
 
 # Setting environment variables
-
 ENV {{R_ENV_KEY}}={{R_ENV_VAL}}
 
 # Listing R packages to be installed
@@ -18,4 +17,4 @@ COPY . /app
 EXPOSE {{R_PORT}}
 
 # Initializing command to run an R script or application
-CMD R -e  "{{R_START_SCRIPT}}"
+CMD [{{R_START_SCRIPT}}]
