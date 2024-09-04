@@ -51,7 +51,7 @@ app.post(
       generateYamlFile();
 
       //  executing git commands
-      //   executeShellCommand();
+      executeShellCommand();
 
       res.send({
         message: `Dockerfile saved at ${writeFilePath}`,

@@ -1,12 +1,11 @@
 # Using r-base image
-FROM r-base:4.2.1
+FROM r-base:4.3.2
 
 # Setting environment variables
 
-ENV MY_PASS=pass
 
 # Listing R packages to be installed
-RUN R -e "install.packages(c('car', 'stringr', 'caret'), repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('caret', 'car'), repos='http://cran.rstudio.com/')"
 
 # working directory inside the container
 WORKDIR /app
@@ -15,7 +14,7 @@ WORKDIR /app
 COPY . /app
 
 # Exposing port
-EXPOSE 5005
+EXPOSE {{R_PORT}}
 
 # Initializing command to run an R script or application
-CMD R -e  "Rscript my.R"
+CMD [{{R_START_SCRIPT}}]
