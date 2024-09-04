@@ -1,12 +1,12 @@
 # Using r-base image
-FROM r-base:3.6.3
+FROM r-base:4.2.1
 
 # Setting environment variables
 
 ENV MY_PASS=pass
 
 # Listing R packages to be installed
-RUN R -e "install.packages(c('jsonlite', 'ggplot2', 'roxygen2', 'caret'), repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('car', 'stringr', 'caret'), repos='http://cran.rstudio.com/')"
 
 # working directory inside the container
 WORKDIR /app
@@ -15,7 +15,7 @@ WORKDIR /app
 COPY . /app
 
 # Exposing port
-EXPOSE 5000
+EXPOSE 5005
 
 # Initializing command to run an R script or application
 CMD R -e  "Rscript my.R"
