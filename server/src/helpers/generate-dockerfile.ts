@@ -41,7 +41,7 @@ export const generateDockerfile = (
     );
   } else {
     dockerfileContent = dockerfileContent.replace(
-      /CMD [{{R_START_SCRIPT}}]\n?/g,
+      /CMD [{{R_START_SCRIPT}}]/g,
       ""
     );
   }
