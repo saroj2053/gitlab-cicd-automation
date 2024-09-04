@@ -1,26 +1,12 @@
 # Using r-base image
-ARG R_VERSION=4.2.1
-FROM r-base:${R_VERSION}
+FROM r-base:4.0.0
 
 # Setting environment variables
-ARG ENV_KEY=
-ARG ENV_VAL=undefined
-ENV ${ENV_KEY}=${ENV_VAL}
 
-# # Installing system dependencies required for R packages
-# RUN apt-get clean && apt-get update && apt-get install -y \
-#     libcurl4-openssl-dev \
-#     libssl-dev \
-#     libxml2-dev \
-#     libxt-dev \
-#     libgit2-dev \
-#     pandoc \
-#     pandoc-citeproc \
-#     && rm -rf /var/lib/apt/lists/*
+ENV MY_PASS=pass
 
 # Listing R packages to be installed
-ARG R_PACKAGES="c('textclean', 'forecast', 'ggplot2', 'devtools')"
-RUN R -e "install.packages(${R_PACKAGES}, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('plotly', 'jsonlite', 'haven', 'lubridate'), repos='http://cran.rstudio.com/')"
 
 # working directory inside the container
 WORKDIR /app
@@ -29,9 +15,7 @@ WORKDIR /app
 COPY . /app
 
 # Exposing port
-ARG PORT=5000
-EXPOSE ${PORT}
+EXPOSE 5000
 
 # Initializing command to run an R script or application
-ARG START_COMMAND=""
-CMD ["/bin/sh", "-c",  "${START_COMMAND}" ]
+CMD R -e  "Rscript my.R"

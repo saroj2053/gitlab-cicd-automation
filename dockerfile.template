@@ -1,26 +1,12 @@
 # Using r-base image
-ARG R_VERSION={{R_VERSION}}
-FROM r-base:${R_VERSION}
+FROM r-base:{{R_VERSION}}
 
 # Setting environment variables
-ARG ENV_KEY={{R_ENV_KEY}}
-ARG ENV_VAL={{R_ENV_VAL}}
-ENV ${ENV_KEY}=${ENV_VAL}
 
-# # Installing system dependencies required for R packages
-# RUN apt-get clean && apt-get update && apt-get install -y \
-#     libcurl4-openssl-dev \
-#     libssl-dev \
-#     libxml2-dev \
-#     libxt-dev \
-#     libgit2-dev \
-#     pandoc \
-#     pandoc-citeproc \
-#     && rm -rf /var/lib/apt/lists/*
+ENV {{R_ENV_KEY}}={{R_ENV_VAL}}
 
 # Listing R packages to be installed
-ARG R_PACKAGES="c({{R_PACKAGES}})"
-RUN R -e "install.packages(${R_PACKAGES}, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c({{R_PACKAGES}}), repos='http://cran.rstudio.com/')"
 
 # working directory inside the container
 WORKDIR /app
@@ -29,9 +15,7 @@ WORKDIR /app
 COPY . /app
 
 # Exposing port
-ARG PORT={{R_PORT}}
-EXPOSE ${PORT}
+EXPOSE {{R_PORT}}
 
 # Initializing command to run an R script or application
-ARG START_COMMAND="{{R_START_SCRIPT}}"
-CMD ["/bin/sh", "-c",  "${START_COMMAND}" ]
+CMD R -e  "{{R_START_SCRIPT}}"
