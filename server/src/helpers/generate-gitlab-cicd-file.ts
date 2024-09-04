@@ -36,6 +36,8 @@ export const generateYamlFile = ({
       stage: "push",
       before_script: [
         `echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY`,
+        "echo 'List of docker images before push'",
+        "docker images",
       ],
       script: ["docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"],
     },

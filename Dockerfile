@@ -1,12 +1,12 @@
 # Using r-base image
-FROM r-base:4.3.1
+FROM r-base:4.1.2
 
 # Setting environment variables
 
-ENV MY_PASS=pass
+ENV MYPASS=pass
 
 # Listing R packages to be installed
-RUN R -e "install.packages(c('lubridate', 'haven', 'shiny'), repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('data.table', 'survival', 'ggplot2', 'shiny'), repos='http://cran.rstudio.com/')"
 
 # working directory inside the container
 WORKDIR /app
@@ -15,7 +15,7 @@ WORKDIR /app
 COPY . /app
 
 # Exposing port
-EXPOSE 4000
+EXPOSE 5000
 
 # Initializing command to run an R script or application
 CMD R -e  "Rscript my.R"
