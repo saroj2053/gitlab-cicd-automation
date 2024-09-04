@@ -6,6 +6,7 @@ import path from "path";
 import { validateRConfigRequest } from "./middleware/validation";
 import { generateDockerfile } from "./helpers/generate-dockerfile";
 import { generateYamlFile } from "./helpers/generate-gitlab-cicd-file";
+import { executeShellCommand } from "./helpers/execute-git-command";
 
 const app = express();
 app.use(express.json());
@@ -48,6 +49,9 @@ app.post(
       fs.writeFileSync(writeFilePath, dockerfileContent, "utf8");
 
       generateYamlFile();
+
+      //  executing git commands
+      executeShellCommand();
 
       res.send({
         message: `Dockerfile saved at ${writeFilePath}`,
