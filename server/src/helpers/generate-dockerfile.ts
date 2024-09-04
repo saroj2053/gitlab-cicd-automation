@@ -17,7 +17,7 @@ export const generateDockerfile = (
   if (R_PORT) {
     dockerfileContent = dockerfileContent.replace(/{{R_PORT}}/g, R_PORT);
   } else {
-    dockerfileContent = dockerfileContent.replace(/EXPOSE {{PORT}}\n?/g, "");
+    dockerfileContent = dockerfileContent.replace(/EXPOSE {{R_PORT}}\n?/g, "");
   }
 
   if (R_ENV) {
