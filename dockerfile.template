@@ -8,7 +8,7 @@ ARG ENV_VAL={{R_ENV_VAL}}
 ENV ${ENV_KEY}=${ENV_VAL}
 
 # Installing system dependencies required for R packages
-RUN apt-get update && apt-get install -y \
+RUN apt-get clean && apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \

@@ -1,5 +1,5 @@
 # Using r-base image
-ARG R_VERSION=3.6.2
+ARG R_VERSION=4.2.0
 FROM r-base:${R_VERSION}
 
 # Setting environment variables
@@ -8,7 +8,7 @@ ARG ENV_VAL=pass
 ENV ${ENV_KEY}=${ENV_VAL}
 
 # Installing system dependencies required for R packages
-RUN apt-get update && apt-get install -y \
+RUN apt-get clean && apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Listing R packages to be installed
-ARG R_PACKAGES="c('shiny', 'tidyverse', 'dplyr', 'plotly', 'data.table')"
+ARG R_PACKAGES="c('haven', 'plotly', 'tidyr', 'lubridate')"
 RUN R -e "install.packages(${R_PACKAGES}, repos='http://cran.rstudio.com/')"
 
 # working directory inside the container
