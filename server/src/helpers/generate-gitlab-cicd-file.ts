@@ -25,7 +25,11 @@ export const generateYamlFile = ({
 
     build: {
       stage: "build",
-      script: ["docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME ."],
+      script: [
+        "echo 'Building docker image...'",
+        "docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .",
+        "docker images",
+      ],
     },
 
     push: {

@@ -7,7 +7,9 @@ stages:
 build:
   stage: build
   script:
+    - echo 'Building docker image...'
     - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .
+    - docker images
 push:
   stage: push
   before_script:
