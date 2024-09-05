@@ -5,7 +5,7 @@ import AppLayout from "./layouts/AppLayout";
 const App = () => {
   return (
     <AppLayout>
-      <Toaster richColors position="top-right" />
+      <Toaster closeButton richColors position="top-right" />
       <RConfigForm />
     </AppLayout>
   );
