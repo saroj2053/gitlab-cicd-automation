@@ -1,11 +1,11 @@
 # Using r-base image
-FROM r-base:4.4.1
+FROM r-base:3.6.3
 
 # Setting environment variables
-
+ENV env=development
 
 # Listing R packages to be installed
-RUN R -e "install.packages(c('caret', 'tidyverse', 'data.table'), repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('data.table', 'ggplot2'), repos='http://cran.rstudio.com/')"
 
 # working directory inside the container
 WORKDIR /app
@@ -14,7 +14,7 @@ WORKDIR /app
 COPY . /app
 
 # Exposing port
-
+EXPOSE 3000
 
 # Initializing command to run an R script or application
-
+CMD ["Rscript","my.R"]

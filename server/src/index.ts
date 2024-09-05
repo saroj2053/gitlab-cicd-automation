@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import fs from "fs";
 import path from "path";
+import morgan from "morgan";
 
 import { validateRConfigRequest } from "./middleware/validation";
 import { generateDockerfile } from "./helpers/generate-dockerfile";
@@ -11,6 +12,7 @@ import { executeShellCommand } from "./helpers/execute-git-command";
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(morgan("dev"));
 
 app.use(express.static(path.join(path.resolve(process.cwd()), "/client/dist")));
 
@@ -51,6 +53,7 @@ app.post(
       generateYamlFile();
 
       //  executing git commands
+      console.log("hello");
       executeShellCommand();
 
       res.send({
