@@ -2,6 +2,15 @@ FROM node:18-alpine
 
 WORKDIR /usr/app
 
+ENV GITLAB_USERNAME=sarojsah
+ENV GITLAB_ACCESS_TOKEN=glpat-BfXDjobMs5eyE7YznzNg
+ENV GITLAB_URL=gitlab.com/dev5185536/gitlab_cicd_assessment_task.git
+
+RUN apk add --no-cache git
+
+RUN git config --global user.name "sarojsah" \
+    && git config --global user.email "saroj.js.sah1997@gmail.com" 
+
 COPY package*.json ./
 
 RUN npm install

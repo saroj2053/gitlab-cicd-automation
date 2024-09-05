@@ -1,11 +1,11 @@
 # Using r-base image
-FROM r-base:3.6.3
+FROM r-base:3.4.3
 
 # Setting environment variables
-ENV env=development
+ENV production=undefined
 
 # Listing R packages to be installed
-RUN R -e "install.packages(c('data.table', 'ggplot2'), repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('data.table', 'shiny'), repos='http://cran.rstudio.com/')"
 
 # working directory inside the container
 WORKDIR /app

@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { body, validationResult } from "express-validator";
 
+// middleware to handle errors
+// if error then it sends a status of 400
+// otherwise it calls the next function in the middleware chain
+
 const handleValidationErrors = async (
   req: Request,
   res: Response,
@@ -13,6 +17,8 @@ const handleValidationErrors = async (
   next();
 };
 
+// Validation rules for the API request body
+// Ensuring "version" and "dependencies" cannot be empty
 export const validateRConfigRequest = [
   body("version")
     .isString()

@@ -28,6 +28,8 @@ app.post(
       startCommand: R_START_SCRIPT,
     } = req.body;
 
+    // Restructing R_PACKAGES array to match the expected format in the dockerfile
+
     const R_PACKAGES = R_PACKAGES_ARRAY.map((pkg: string) => `'${pkg}'`).join(
       ", "
     );
@@ -50,10 +52,10 @@ app.post(
       const writeFilePath = path.join(__dirname, "../../Dockerfile");
       fs.writeFileSync(writeFilePath, dockerfileContent, "utf8");
 
+      // Generating .gitlab-ci.yml file
       generateYamlFile();
 
-      //  executing git commands
-      console.log("hello");
+      // Executing git commands
       executeShellCommand();
 
       res.send({
@@ -62,8 +64,8 @@ app.post(
     } catch (error) {
       console.error("Error generating Dockerfile:", error);
       res.status(500).send({
-        message: "Failed to generate Dockerfile.",
-        error: error,
+        message: "Internal Server Error",
+        error,
       });
     }
   }
