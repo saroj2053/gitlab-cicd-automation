@@ -1,4 +1,4 @@
-import { Navbar, NavbarBrand } from "@nextui-org/react";
+import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
 
 const Header = () => {
   return (
@@ -8,11 +8,16 @@ const Header = () => {
       isBordered
       shouldHideOnScroll
     >
-      <NavbarBrand>
-        <p className="font-bold text-2xl text-slate-800">
-          GitLab CI/CD Automation Platform
-        </p>
-      </NavbarBrand>
+      <NavbarContent
+        justify="center"
+        className="w-full flex justify-center items-center"
+      >
+        <NavbarItem>
+          <p className="font-bold text-2xl text-slate-800">
+            GitLab CI/CD Automation Platform
+          </p>
+        </NavbarItem>
+      </NavbarContent>
     </Navbar>
   );
 };

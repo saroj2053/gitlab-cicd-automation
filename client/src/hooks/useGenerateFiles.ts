@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RConfiguration } from "../types";
+import { toast } from "sonner";
 
 const useGenerateFiles = () => {
   const [loading, setLoading] = useState(false);
@@ -16,8 +17,11 @@ const useGenerateFiles = () => {
         }
       );
 
-      const result = await response.json();
+      if (response.ok) {
+        toast.success("Files generated successfully");
+      }
 
+      const result = await response.json();
       console.log(result);
     } catch (error) {
       console.log(error);
