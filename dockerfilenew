@@ -2,9 +2,9 @@ FROM node:18-alpine
 
 WORKDIR /usr/app
 
-ENV GITLAB_USERNAME=sarojsah
-ENV GITLAB_ACCESS_TOKEN=glpat-BfXDjobMs5eyE7YznzNg
-ENV GITLAB_URL=gitlab.com/dev5185536/gitlab_cicd_assessment_task.git
+ENV GITLAB_USERNAME=process.env.GITLAB_USERNAME
+ENV GITLAB_ACCESS_TOKEN=process.env.GITLAB_ACCESS_TOKEN
+ENV GITLAB_URL=process.env.GITLAB_URL
 
 RUN apk add --no-cache git
 
